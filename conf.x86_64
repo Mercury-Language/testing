@@ -1,0 +1,23 @@
+# Specific configuration for a test platform.
+
+INSTALL_LIBGRADES="hlc.gc"
+TEST_GRADES="
+    hlc.gc
+    hlc.par.gc
+    asm_fast.gc
+    asm_fast.gc.debug.stseg.trseg
+    asm_fast.gc.decldebug.stseg
+    asm_fast.par.gc"
+
+# The pre_bootcheck function runs prior to bootcheck for each test grade.
+# The workspace will be in whatever state the previous bootcheck left it in.
+pre_bootcheck() {
+    case "$GRADE" in
+        asm_fast.gc | hlc.gc)
+            echo 'EXTRA_MCFLAGS=-O5 --intermod-opt' >Mmake.stage.params
+            ;;
+        *)
+            true >Mmake.stage.params
+            ;;
+    esac
+}

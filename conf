@@ -1,0 +1,11 @@
+# You can set default parameters for all test platforms.
+
+PLATFORMS="x86_64 i686"
+#INSTALL_LIBGRADES=
+#TEST_GRADES=
+#TEST_SUITE=yes
+#OUTPUT=
+#PARALLEL=
+
+export DIFF_OPTS=-u
+export PATH="$HOME/bin/ccache:$PATH"

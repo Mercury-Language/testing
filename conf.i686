@@ -1,0 +1,25 @@
+# Specific configuration for a test platform.
+
+export CC="gcc -m32"
+INSTALL_LIBGRADES=
+TEST_GRADES="hlc.par.gc reg.gc csharp java"
+
+pre_bootcheck() {
+    case "$GRADE" in
+        hlc.par.gc)
+            echo 'EXTRA_MCFLAGS=-O5 --intermod-opt' >Mmake.stage.params
+            ;;
+        *)
+            true >Mmake.stage.params
+            ;;
+    esac
+
+    # Running the stage2 compiler in java and csharp grades is far too slow
+    # and inefficient. Things may improve if we enable AOT compilation of the
+    # compiler where possible.
+    case "$GRADE" in
+        csharp | java)
+            TEST_SUITE=no
+            ;;
+    esac
+}

@@ -1,0 +1,22 @@
+body {
+    font-family: sans-serif;
+    padding: 0px 10px;
+}
+h1 { font-size: 200% }
+h2 { font-size: 180% }
+h3 { font-size: 120% }
+h1,h2,h3,a {
+    color: #139;
+    text-decoration: none;
+}
+div.version + div.version {
+    border-top: 2px solid #139;
+    margin-top: 40px;
+}
+div.platform + div.platform {
+    border-top: 1px dashed #139;
+    margin-top: 30px;
+}
+p,pre {
+    padding-left: 20px;
+}
