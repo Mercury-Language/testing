@@ -3,7 +3,7 @@
 # Pick out messages of interest from build logs.
 #
 
-/warning:|error:|not successful|^\*\* error|^FAILED TEST/ &&
+/warning:|error:|not successful|^\*\* error|^FAILED TEST|^ERROR/ &&
     !/make.*: undefined variable/ &&
     !/mmake.* recipe for target/ &&
     !/submake: disabling jobserver/ &&
