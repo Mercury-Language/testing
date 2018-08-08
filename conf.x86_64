@@ -7,6 +7,7 @@ TEST_GRADES="
     asm_fast.gc
     asm_fast.gc.debug.stseg.trseg
     asm_fast.gc.decldebug.stseg
+    asm_fast.gc.profdeep.stseg
     asm_fast.par.gc"
 
 # The pre_bootcheck function runs prior to bootcheck for each test grade.

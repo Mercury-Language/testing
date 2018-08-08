@@ -2,7 +2,7 @@
 
 export CC="gcc -m32"
 INSTALL_LIBGRADES=
-TEST_GRADES="hlc.par.gc reg.gc csharp java"
+TEST_GRADES="hlc.par.gc hlc.gc.memprof reg.gc csharp java"
 
 pre_bootcheck() {
     case "$GRADE" in
