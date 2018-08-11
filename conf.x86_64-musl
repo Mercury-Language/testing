@@ -1,0 +1,5 @@
+# Specific configuration for a test platform.
+
+export CC=musl-gcc
+INSTALL_LIBGRADES=
+TEST_GRADES="hlc.par.gc asm_fast.gc"
