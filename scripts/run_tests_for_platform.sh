@@ -127,8 +127,8 @@ run_bootcheck() {
     set -e
 
     # 'cp -t' is not portable.
-    "${scripts_dir}/list_test_error_files.sh" | while read -r errfile; do
-        cp "$errfile" "${platform_output_dir}/${grade}"
+    "${scripts_dir}/list_test_error_files.sh" | while IFS= read -r errfile; do
+        cp "$errfile" "${platform_output_dir}/${grade}" || true
     done
 
     {
