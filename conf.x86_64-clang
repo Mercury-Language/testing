@@ -1,0 +1,5 @@
+# Specific configuration for a test platform.
+
+export CC=clang
+INSTALL_LIBGRADES=
+TEST_GRADES="hlc.par.gc none.gc"
