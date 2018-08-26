@@ -22,3 +22,6 @@ pre_bootcheck() {
             ;;
     esac
 }
+
+CROSS_MINGW_HOST="x86_64-w64-mingw32"
+CROSS_MINGW_LIBGRADES="hlc.par.gc,asm_fast.gc"

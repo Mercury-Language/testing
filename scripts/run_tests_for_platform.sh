@@ -88,12 +88,12 @@ cd "$(dirname "$0")"/..
 }
 
 # Function to run bootcheck in a grade.
-# Input variables: grade_num, grade
+# Input variables: status_num, grade
 run_bootcheck() {
     mkdir -p "${platform_output_dir}/${grade}"
     log_file="${platform_output_dir}/${grade}/bootcheck.txt"
 
-    status_file=$(printf '%s/status.%02d.html' "$platform_output_dir" "$grade_num")
+    status_file=$(printf '%s/status.%02d.html' "$platform_output_dir" "$status_num")
     status_header="<h3><a href='${platform_output_url}/${grade}'>${grade}</a></h3>"
     update_status "<p>Bootcheck in progress, started at $(date)" \
         "<a href='${platform_output_url}/${grade}/bootcheck.txt'>(log)</a>" \
@@ -153,16 +153,72 @@ run_bootcheck() {
 
 # Bootcheck in each grade.
 {
+    status_num=1
+
     if test "$install_status" -eq 0; then
-        grade_num=1
         for grade in $TEST_GRADES; do
-            if test "$grade_num" -ne 1; then
+            if test "$status_num" -ne 1; then
                 rm -rf tests
                 cp -Rl tests.clean tests
             fi
             run_bootcheck
-            grade_num=$((grade_num + 1))
+            status_num=$((status_num + 1))
         done
+    fi
+}
+
+# Optional cross-compilation test.
+{
+    if test -n "$CROSS_MINGW_HOST" ; then
+        log_file="${platform_output_dir}/cross_install.txt"
+        status_file=$(printf '%s/status.%02d.html' "$platform_output_dir" "$status_num")
+        status_header="<h3><a href='${platform_output_url}'>${CROSS_MINGW_HOST}</a></h3>"
+        update_status "<p>Installation in progress, started at $(date)" \
+            "<a href='$platform_output_url/cross_install.txt'>(log)</a>" \
+            "</p>"
+        update_index
+
+        cross_build_dir="${build_dir}/cross"
+        cross_install_dir="${install_dir}/cross"
+
+        # XXX Copy or link these files first as the Mercury build system will
+        # try to use the just-installed cross-compiled binaries to build
+        # library grades.
+        mkdir -p "${cross_install_dir}/bin"
+        ln "${install_dir}/bin"/mercury_compile \
+            "${install_dir}/bin"/mkinit \
+            "${install_dir}/bin"/mdemangle \
+            "${cross_install_dir}/bin"
+
+        set +e
+        {
+            mkdir -p "$cross_build_dir" &&
+                cd "$cross_build_dir" &&
+                tar -zxf "$ROTD_ARCHIVE" &&
+                cd "$ROTD_BASENAME" &&
+                ./tools/configure_mingw_cross \
+                    --host="$CROSS_MINGW_HOST" \
+                    --prefix="$cross_install_dir" \
+                    --enable-libgrades="$CROSS_MINGW_LIBGRADES" &&
+                make install PARALLEL="-j${PARALLEL}"
+            install_status=$?
+        } >"$log_file" 2>&1
+        set -e
+
+        {
+            echo "$status_header"
+            if test "$install_status" -ne 0; then
+                echo "<p>make install failed with exit status $install_status"
+                echo "<a href='$platform_output_url/cross_install.txt'>(log)</a></p>"
+            else
+                echo "<p>make install done.</p>"
+            fi
+            echo "<pre>"
+            # Should HTML escape this, oh well.
+            "${scripts_dir}/filter_warnings_or_errors.awk" <"$log_file" || true
+            echo "</pre>"
+        } >"$status_file"
+        update_index
     fi
 }
 

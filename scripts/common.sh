@@ -13,6 +13,8 @@ setup_config() {
     OUTPUT=$(readlink -e "$OUTPUT") # must be absolute path
     PARALLEL=${PARALLEL:-$(nproc 2>/dev/null)}
     PARALLEL=${PARALLEL:-1}
+    CROSS_MINGW_HOST=${CROSS_MINGW_HOST:-}
+    CROSS_MINGW_LIBGRADES=${CROSS_MINGW_LIBGRADES:-}
 
     readonly scripts_dir=${PWD}/scripts
     readonly archives_dir=${PWD}/archives

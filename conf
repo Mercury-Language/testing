@@ -6,6 +6,8 @@ PLATFORMS="x86_64 i686 x86_64-musl x86_64-clang"
 #TEST_SUITE=yes
 #OUTPUT=
 #PARALLEL=
+#CROSS_MINGW_HOST=
+#CROSS_MINGW_LIBGRADES=
 
 export DIFF_OPTS=-u
 export PATH="$HOME/bin/ccache:$PATH"
