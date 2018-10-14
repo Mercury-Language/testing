@@ -1,5 +1,9 @@
 # Specific configuration for a test platform.
 
+if [ -x "$HOME/musl/bin/musl-gcc" ]; then
+    export PATH="$PATH:$HOME/musl/bin"
+fi
+
 export CC=musl-gcc
 INSTALL_LIBGRADES=
 TEST_GRADES="hlc.par.gc asm_fast.gc"
