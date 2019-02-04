@@ -31,12 +31,12 @@ cd "$(dirname "$0")"/..
     href=$(
         curl -s "$DL_URL" |
             awk '/Latest ROTD:/ { k=1 }
-                 /<a href=/ && k==1 { print; k=2 }'
+                 /<a href=.*\.tar\.xz/ && k==1 { print; k=2 }'
     )
     href=${href#*\"}
     href=${href%\"*}
     case $href in
-        */mercury-srcdist-rotd-????-??-??.tar.gz) ;;
+        */mercury-srcdist-rotd-????-??-??.tar.xz) ;;
         *)
             echo "$(date) -- Unexpected URL: $href"
             exit 1
@@ -46,7 +46,7 @@ cd "$(dirname "$0")"/..
     readonly rotd_url=${DL_URL}/${href}
     readonly rotd_filename=${href#*/}
     export ROTD_ARCHIVE=${archives_dir}/${rotd_filename}
-    export ROTD_BASENAME=${rotd_filename%.tar.gz}
+    export ROTD_BASENAME=${rotd_filename%.tar.xz}
     export ROTD_VERSION=${ROTD_BASENAME#*mercury-srcdist-rotd-}
     export ROTD_OUTPUT_DIR=${OUTPUT}/builds/rotd-${ROTD_VERSION}
 }

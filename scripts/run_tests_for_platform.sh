@@ -60,7 +60,7 @@ cd "$(dirname "$0")"/..
     {
         mkdir -p "$build_dir" &&
             cd "$build_dir" &&
-            tar -zxf "$ROTD_ARCHIVE" &&
+            xz -dc "$ROTD_ARCHIVE" | tar xf - &&
             cd "$ROTD_BASENAME" &&
             ./configure \
                 --prefix="$install_dir" \
@@ -194,7 +194,7 @@ run_bootcheck() {
         {
             mkdir -p "$cross_build_dir" &&
                 cd "$cross_build_dir" &&
-                tar -zxf "$ROTD_ARCHIVE" &&
+                xz -dc "$ROTD_ARCHIVE" | tar xf - &&
                 cd "$ROTD_BASENAME" &&
                 ./tools/configure_mingw_cross \
                     --host="$CROSS_MINGW_HOST" \
