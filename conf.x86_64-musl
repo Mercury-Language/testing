@@ -7,3 +7,8 @@ fi
 export CC=musl-gcc
 INSTALL_LIBGRADES=
 TEST_GRADES="hlc.par.gc asm_fast.gc"
+
+# The check_namespace target doesn't work with musl-gcc
+# (i.e. when the musl headers are not located in standard system directories)
+# because the musl headers will not be suppressed by the -nostdinc option.
+CHECK_NAMESPACE=no

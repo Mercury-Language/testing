@@ -9,6 +9,7 @@ setup_config() {
     INSTALL_LIBGRADES=${INSTALL_LIBGRADES:-}
     TEST_GRADES=${TEST_GRADES:-}
     TEST_SUITE=${TEST_SUITE:-yes}
+    CHECK_NAMESPACE=${CHECK_NAMESPACE:-yes}
     OUTPUT=${OUTPUT:-output}
     OUTPUT=$(readlink -e "$OUTPUT") # must be absolute path
     PARALLEL=${PARALLEL:-$(nproc 2>/dev/null)}

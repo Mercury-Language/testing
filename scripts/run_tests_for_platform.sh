@@ -119,6 +119,9 @@ run_bootcheck() {
             if test "$TEST_SUITE" = no; then
                 bootcheck_args="$bootcheck_args --no-test-suite"
             fi
+            if test "$CHECK_NAMESPACE" = no; then
+                bootcheck_args="$bootcheck_args --no-check-namespace"
+            fi
             ./tools/bootcheck --grade "$grade" --test-params \
                 --delete-deep-data $bootcheck_args
         }
