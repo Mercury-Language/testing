@@ -87,6 +87,10 @@ cd "$(dirname "$0")"/..
     export PATH="$install_dir/bin:$PATH"
 }
 
+timestamp() {
+    date +'%s'
+}
+
 # Function to run bootcheck in a grade.
 # Input variables: status_num, grade
 run_bootcheck() {
@@ -109,6 +113,8 @@ run_bootcheck() {
             ;;
     esac
 
+    start_time=$(timestamp)
+
     set +e
     (
         ulimit -t 300
@@ -128,6 +134,9 @@ run_bootcheck() {
     ) >"$log_file" 2>&1
     bootcheck_status=$?
     set -e
+
+    end_time=$(timestamp)
+    dur_hours=$( awk "BEGIN { print ($end_time - $start_time)/60.0/60.0 }" )
 
     # 'cp -t' is not portable.
     "${scripts_dir}/list_test_error_files.sh" | while IFS= read -r errfile; do
@@ -150,6 +159,7 @@ run_bootcheck() {
             fi
         fi
         echo "</pre>"
+        printf "<p>Duration: %.2f hours</p>" "$dur_hours"
     } >"$status_file"
     update_index
 }
