@@ -114,6 +114,7 @@ run_bootcheck() {
     esac
 
     start_time=$(timestamp)
+    uptime >"$log_file"
 
     set +e
     (
@@ -131,10 +132,11 @@ run_bootcheck() {
             ./tools/bootcheck --grade "$grade" --test-params \
                 --delete-deep-data $bootcheck_args
         }
-    ) >"$log_file" 2>&1
+    ) >>"$log_file" 2>&1
     bootcheck_status=$?
     set -e
 
+    uptime >>"$log_file"
     end_time=$(timestamp)
     dur_hours=$( awk "BEGIN { print ($end_time - $start_time)/60.0/60.0 }" )
 
