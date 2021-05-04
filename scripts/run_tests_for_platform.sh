@@ -211,7 +211,12 @@ run_bootcheck() {
                 cd "$cross_build_dir" &&
                 xz -dc "$ROTD_ARCHIVE" | tar xf - &&
                 cd "$ROTD_BASENAME" &&
-                ./tools/configure_mingw_cross \
+                if test -f tools/configure_cross ; then
+                    configure=tools/configure_cross
+                else
+                    configure=tools/configure_mingw_cross
+                fi &&
+                $configure \
                     --host="$CROSS_MINGW_HOST" \
                     --prefix="$cross_install_dir" \
                     --enable-libgrades="$CROSS_MINGW_LIBGRADES" &&
