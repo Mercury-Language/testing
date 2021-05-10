@@ -6,6 +6,7 @@
 setup_config() {
     DL_URL=${DL_URL:-http://dl.mercurylang.org}
     PLATFORMS=${PLATFORMS:-}
+    CONFIGURE_OPTS=${CONFIGURE_OPTS:-}
     INSTALL_LIBGRADES=${INSTALL_LIBGRADES:-}
     TEST_GRADES=${TEST_GRADES:-}
     TEST_SUITE=${TEST_SUITE:-yes}

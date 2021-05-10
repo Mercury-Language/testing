@@ -5,6 +5,7 @@ if [ -x "$HOME/musl/bin/musl-gcc" ]; then
 fi
 
 export CC=musl-gcc
+CONFIGURE_OPTS=--disable-shared-libs
 INSTALL_LIBGRADES=
 TEST_GRADES="hlc.par.gc asm_fast.gc"
 

@@ -64,6 +64,7 @@ cd "$(dirname "$0")"/..
             cd "$ROTD_BASENAME" &&
             ./configure \
                 --prefix="$install_dir" \
+                $CONFIGURE_OPTS \
                 --enable-libgrades="$INSTALL_LIBGRADES" &&
             cp -Rl tests tests.clean &&
             make install PARALLEL="-j${PARALLEL}"
