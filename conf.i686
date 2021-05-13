@@ -1,6 +1,6 @@
 # Specific configuration for a test platform.
 
-export CC="gcc -m32"
+export CC=i686-linux-gnu-gcc
 INSTALL_LIBGRADES=
 TEST_GRADES="hlc.par.gc hlc.gc.memprof reg.gc csharp java"
 
