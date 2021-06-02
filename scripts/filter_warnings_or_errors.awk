@@ -6,7 +6,7 @@
 /warning:|error:|not successful|^\*\* error|^FAILED TEST|^ERROR/ &&
     !/make.*: undefined variable/ &&
     !/mmake.* recipe for target/ &&
-    !/submake: disabling jobserver/ &&
+    !/-j1 forced in submake: resetting jobserver mode/ &&
     !/^mercury_context\.c:.*__fdelt_warn/ &&
     !/^cp: warning: source file .* specified more than once/ &&
     !/Signal.* is internal proprietary API/ \
