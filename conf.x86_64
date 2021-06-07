@@ -8,8 +8,8 @@ TEST_GRADES="
     asm_fast.gc.debug.stseg.trseg
     asm_fast.gc.decldebug.stseg
     asm_fast.gc.profdeep.stseg
-    asm_fast.gc.memprof
-    asm_fast.par.gc"
+    asm_fast.par.gc
+    hlc.gc.memprof"
 
 # The pre_bootcheck function runs prior to bootcheck for each test grade.
 # The workspace will be in whatever state the previous bootcheck left it in.
