@@ -3,7 +3,25 @@
 # Pick out messages of interest from build logs.
 #
 
-/warning:|error:|not successful|^\*\* error|^FAILED TEST|^ERROR/ &&
+/^FAILED TEST/ {
+    err = 1
+    in_failed_test = 1
+    print
+    next
+}
+
+/^END OF THE LOG OF THE FAILED TEST/ {
+    in_failed_test = 0
+    next
+}
+
+/not successful|^ERROR/ {
+    err = 1
+    print
+    next
+}
+
+/warning:|error:|^\*\* error/ &&
     !/make.*: undefined variable/ &&
     !/mmake.* recipe for target/ &&
     !/-j1 forced in submake: resetting jobserver mode/ &&
@@ -11,8 +29,10 @@
     !/^cp: warning: source file .* specified more than once/ &&
     !/Signal.* is internal proprietary API/ \
 {
-    print
     err = 1
+    if (!in_failed_test) {
+        print
+    }
 }
 
 END {
