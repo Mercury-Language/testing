@@ -2,11 +2,24 @@
 #
 # Pick out messages of interest from build logs.
 #
+# Variables: LOGDIR (optional)
+#
 
-/^FAILED TEST/ {
+# FAILED TEST $3 in grade $6
+/^FAILED TEST .* in grade/ {
     err = 1
     in_failed_test = 1
-    print
+
+    test_name = $3
+    grade = $6
+    if (LOGDIR != "") {
+        test_basename = test_name
+        sub(/.*\//, "", test_basename)
+        url = LOGDIR "/" test_basename ".log"
+        print "FAILED TEST <a href=\"" url "\">" test_name "</a> in grade " grade
+    } else {
+        print
+    }
     next
 }
 

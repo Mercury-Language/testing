@@ -79,8 +79,7 @@ cd "$(dirname "$0")"/..
             echo "<a href='$platform_output_url/install.txt'>(log)</a></p>"
         fi
         echo "<pre>"
-        # Should HTML escape this, oh well.
-        "${scripts_dir}/filter_warnings_or_errors.awk" <"$log_file" || true
+        awk -f "${scripts_dir}/filter_warnings_or_errors.awk" <"$log_file" || true
         echo "</pre>"
     } >"$status_file"
     update_index
@@ -154,7 +153,9 @@ run_bootcheck() {
             echo "</p>"
         fi
         echo "<pre>"
-        if "${scripts_dir}/filter_warnings_or_errors.awk" <"$log_file"; then
+        if awk -v LOGDIR="${platform_output_url}/${grade}" \
+                -f "${scripts_dir}/filter_warnings_or_errors.awk" <"$log_file"
+        then
             if grep -q "^starting the test suite at" "$log_file"; then
                 test "$bootcheck_status" -ne 0 || echo "No problems."
             else
@@ -235,8 +236,7 @@ run_bootcheck() {
                 echo "<p>make install done.</p>"
             fi
             echo "<pre>"
-            # Should HTML escape this, oh well.
-            "${scripts_dir}/filter_warnings_or_errors.awk" <"$log_file" || true
+            awk -f "${scripts_dir}/filter_warnings_or_errors.awk" <"$log_file" || true
             echo "</pre>"
         } >"$status_file"
         update_index
