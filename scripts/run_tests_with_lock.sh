@@ -34,7 +34,7 @@ cd "$(dirname "$0")"/..
                  /<a href=.*\.tar\.xz/ && k==1 { print; k=2 }'
     )
     href=${href#*\"}
-    href=${href%\"*}
+    href=${href%%\"*}
     case $href in
         */mercury-srcdist-rotd-????-??-??.tar.xz) ;;
         *)
