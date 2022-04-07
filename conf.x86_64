@@ -5,7 +5,7 @@ TEST_GRADES="
     hlc.gc
     hlc.par.gc
     asm_fast.gc
-    asm_fast.gc.debug.stseg.trseg
+    asm_fast.gc.debug.stseg.tr
     asm_fast.gc.decldebug.stseg
     asm_fast.gc.profdeep.stseg
     asm_fast.par.gc
