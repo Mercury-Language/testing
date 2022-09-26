@@ -2,7 +2,7 @@
 
 CONFIGURE_OPTS="--build=i686-linux-gnu --host=i686-linux-gnu"
 INSTALL_LIBGRADES=
-TEST_GRADES="hlc.par.gc reg.gc csharp java"
+TEST_GRADES="hlc.par.gc csharp java"
 
 pre_bootcheck() {
     case "$GRADE" in
