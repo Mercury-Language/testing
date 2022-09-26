@@ -1,8 +1,8 @@
 # Specific configuration for a test platform.
 
 CONFIGURE_OPTS="--build=i686-linux-gnu --host=i686-linux-gnu"
-INSTALL_LIBGRADES=
-TEST_GRADES="hlc.par.gc csharp java"
+INSTALL_LIBGRADES="java"
+TEST_GRADES="hlc.par.gc csharp"
 
 pre_bootcheck() {
     case "$GRADE" in
