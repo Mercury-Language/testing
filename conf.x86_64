@@ -5,8 +5,7 @@ TEST_GRADES="
     hlc.gc
     hlc.par.gc
     asm_fast.gc
-    asm_fast.gc.debug.stseg.tr
-    asm_fast.gc.decldebug.stseg
+    asm_fast.gc.decldebug.stseg.tr
     asm_fast.gc.profdeep.stseg
     asm_fast.par.gc
     hlc.gc.memprof"
@@ -20,6 +19,14 @@ pre_bootcheck() {
             ;;
         *)
             true >Mmake.stage.params
+            ;;
+    esac
+
+    # Bootchecking in the memprof should be enough. Running the test suite is
+    # unlikely to tell us anything that other grades won't.
+    case "$GRADE" in
+        *.memprof)
+            TEST_SUITE=no
             ;;
     esac
 }
