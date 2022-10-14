@@ -6,9 +6,6 @@ TEST_GRADES="hlc.par.gc csharp"
 
 pre_bootcheck() {
     case "$GRADE" in
-        hlc.par.gc)
-            echo 'EXTRA_MCFLAGS=-O5 --intermod-opt' >Mmake.stage.params
-            ;;
         *)
             true >Mmake.stage.params
             ;;
