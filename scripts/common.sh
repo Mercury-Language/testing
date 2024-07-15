@@ -18,13 +18,13 @@ setup_config() {
     CROSS_MINGW_HOST=${CROSS_MINGW_HOST:-}
     CROSS_MINGW_LIBGRADES=${CROSS_MINGW_LIBGRADES:-}
 
-    readonly scripts_dir=${PWD}/scripts
-    readonly archives_dir=${PWD}/archives
-    readonly run_dir=${PWD}/run
-    readonly build_dir=${run_dir}/build
-    readonly install_dir=${run_dir}/install
-    readonly lastmod=${run_dir}/lastmod
-    readonly index_html=${OUTPUT}/index.html
+    readonly scripts_dir="${PWD}/scripts"
+    readonly archives_dir="${PWD}/archives"
+    readonly run_dir="${PWD}/run"
+    readonly build_dir="${run_dir}/build"
+    readonly install_dir="${run_dir}/install"
+    readonly lastmod="${run_dir}/lastmod"
+    readonly index_html="${OUTPUT}/index.html"
 }
 
 # Regenerate index.html

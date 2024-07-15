@@ -43,12 +43,12 @@ cd "$(dirname "$0")"/..
             ;;
     esac
 
-    readonly rotd_url=${DL_URL}/${href}
-    readonly rotd_filename=${href#*/}
-    export ROTD_ARCHIVE=${archives_dir}/${rotd_filename}
-    export ROTD_BASENAME=${rotd_filename%.tar.xz}
-    export ROTD_VERSION=${ROTD_BASENAME#*mercury-srcdist-rotd-}
-    export ROTD_OUTPUT_DIR=${OUTPUT}/builds/rotd-${ROTD_VERSION}
+    readonly rotd_url="${DL_URL}/${href}"
+    readonly rotd_filename="${href#*/}"
+    export ROTD_ARCHIVE="${archives_dir}/${rotd_filename}"
+    export ROTD_BASENAME="${rotd_filename%.tar.xz}"
+    export ROTD_VERSION="${ROTD_BASENAME#*mercury-srcdist-rotd-}"
+    export ROTD_OUTPUT_DIR="${OUTPUT}/builds/rotd-${ROTD_VERSION}"
 }
 
 # Download archive.

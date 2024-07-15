@@ -22,8 +22,8 @@ cd "$(dirname "$0")"/..
     test -r "conf.$PLATFORM" && . "./conf.$PLATFORM"
     setup_config
 
-    readonly platform_output_dir=${ROTD_OUTPUT_DIR}/${PLATFORM}
-    readonly platform_output_url=${platform_output_dir#"$OUTPUT/"}
+    readonly platform_output_dir="${ROTD_OUTPUT_DIR}/${PLATFORM}"
+    readonly platform_output_url="${platform_output_dir#${OUTPUT}/}"
 }
 
 # Check if we should continue.
