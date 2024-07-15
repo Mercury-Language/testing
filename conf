@@ -1,6 +1,6 @@
 # You can set default parameters for all test platforms.
 
-PLATFORMS="x86_64 i686 x86_64-musl x86_64-clang"
+PLATFORMS="x86_64 x86_64-musl x86_64-clang i686"
 #CONFIGURE_OPTS=
 #INSTALL_LIBGRADES=
 #TEST_GRADES=
