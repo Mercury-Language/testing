@@ -70,6 +70,13 @@ cd "$(dirname "$0")"/..
     fi
 )
 
+# Alternate testing of csharp and java grades as they both take a long time.
+if test -e run/next-is-csharp; then
+    rm run/next-is-csharp
+else
+    touch run/next-is-csharp
+fi
+
 # Test each platform.
 {
     export PLATFORM

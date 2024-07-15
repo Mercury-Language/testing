@@ -10,6 +10,13 @@ TEST_GRADES="
     asm_fast.par.gc
     hlc.gc.memprof"
 
+# Alternate testing of csharp and java grades as they both take a long time.
+if [ -f run/next-is-csharp ]; then
+    TEST_GRADES="$TEST_GRADES csharp"
+else
+    TEST_GRADES="$TEST_GRADES java"
+fi
+
 # The pre_bootcheck function runs prior to bootcheck for each test grade.
 # The workspace will be in whatever state the previous bootcheck left it in.
 pre_bootcheck() {
@@ -22,10 +29,16 @@ pre_bootcheck() {
             ;;
     esac
 
-    # Bootchecking in the memprof should be enough. Running the test suite is
-    # unlikely to tell us anything that other grades won't.
     case "$GRADE" in
         *.memprof)
+            # Bootchecking in the memprof should be enough. Running the test
+            # suite is unlikely to tell us anything that other grades won't.
+            TEST_SUITE=no
+            ;;
+        csharp | java)
+            # Running the stage2 compiler in java and csharp grades is far too
+            # slow and inefficient. Things may improve if we enable AOT
+            # compilation of the compiler where possible.
             TEST_SUITE=no
             ;;
     esac

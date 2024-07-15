@@ -1,22 +1,13 @@
 # Specific configuration for a test platform.
 
 CONFIGURE_OPTS="--build=i686-linux-gnu --host=i686-linux-gnu"
-INSTALL_LIBGRADES="java"
-TEST_GRADES="hlc.par.gc csharp"
+INSTALL_LIBGRADES=""
+TEST_GRADES="hlc.par.gc"
 
 pre_bootcheck() {
     case "$GRADE" in
         *)
             true >Mmake.stage.params
-            ;;
-    esac
-
-    # Running the stage2 compiler in java and csharp grades is far too slow
-    # and inefficient. Things may improve if we enable AOT compilation of the
-    # compiler where possible.
-    case "$GRADE" in
-        csharp | java)
-            TEST_SUITE=no
             ;;
     esac
 }
