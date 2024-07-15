@@ -104,15 +104,6 @@ run_bootcheck() {
         "</p>"
     update_index
 
-    case "$grade" in
-        *csharp* | *java*)
-            bootcheck_args="--use-mmc-make -m EXTRA_MCFLAGS+=-j${PARALLEL}"
-            ;;
-        *)
-            bootcheck_args="-j${PARALLEL}"
-            ;;
-    esac
-
     start_time=$(timestamp)
     uptime >"$log_file"
 
@@ -123,6 +114,7 @@ run_bootcheck() {
             GRADE=$grade pre_bootcheck
         fi && {
             grep -H . Mmake.stage.params 2>/dev/null
+            bootcheck_args="-j${PARALLEL}"
             if test "$TEST_SUITE" = no; then
                 bootcheck_args="$bootcheck_args --no-test-suite"
             fi
