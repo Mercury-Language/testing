@@ -23,6 +23,10 @@
     next
 }
 
+in_failed_test && /^ERROR OUTPUT$/ {
+    next
+}
+
 /^END OF THE LOG OF THE FAILED TEST/ {
     in_failed_test = 0
     next
