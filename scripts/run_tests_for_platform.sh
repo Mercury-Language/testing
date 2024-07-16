@@ -118,6 +118,9 @@ run_bootcheck() {
             if test "$TEST_SUITE" = no; then
                 bootcheck_args="$bootcheck_args --no-test-suite"
             fi
+            if test "$TEST_WITH_STAGE_1_COMPILER" = yes; then
+                bootcheck_args="$bootcheck_args --test-with-stage-1-compiler"
+            fi
             if test "$CHECK_NAMESPACE" = no; then
                 bootcheck_args="$bootcheck_args --no-check-namespace"
             fi

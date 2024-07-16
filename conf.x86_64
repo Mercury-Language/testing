@@ -36,10 +36,11 @@ pre_bootcheck() {
             TEST_SUITE=no
             ;;
         csharp | java)
-            # Running the stage2 compiler in java and csharp grades is far too
-            # slow and inefficient. Things may improve if we enable AOT
-            # compilation of the compiler where possible.
-            TEST_SUITE=no
+            # Running the stage2 compiler in java and csharp grades is very
+            # slow and inefficient. Get through the test suite more quickly by
+            # using the stage1 compiler. We still use stage2 to build stage3
+            # so it's not completely untested.
+            TEST_WITH_STAGE_1_COMPILER=yes
             ;;
     esac
 }

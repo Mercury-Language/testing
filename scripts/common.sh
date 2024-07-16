@@ -10,6 +10,7 @@ setup_config() {
     INSTALL_LIBGRADES=${INSTALL_LIBGRADES:-}
     TEST_GRADES=${TEST_GRADES:-}
     TEST_SUITE=${TEST_SUITE:-yes}
+    TEST_WITH_STAGE_1_COMPILER=${TEST_WITH_STAGE_1_COMPILER:-no}
     CHECK_NAMESPACE=${CHECK_NAMESPACE:-yes}
     OUTPUT=${OUTPUT:-output}
     OUTPUT=$(readlink -e "$OUTPUT") # must be absolute path
